@@ -17,9 +17,19 @@
                 echo "<input name=$id type=text size=7>";
                 // determine when value has been submitted and is not empty
                 if(isset($_POST['submit']) && !empty($_POST[$id])) {
-                    // ensure value printed is only 'x' or 'p'
+                    // ensure value printed is only 'x' or 'o'
                     if(strtolower($_POST[$id]) === "x" | strtolower($_POST[$id]) === "o") {
                         echo "value=$_POST[$id]";
+                        // check for matches across rows at inputs 123, 456, 789
+                        for($a=1, $b=2, $c=3; $a<=7, $b<=8, $c<=9; $a+=3, $b+=3, $c+=3) {
+                            if($_POST[$a]===$_POST[$b] && $_POST[$b]===$_POST[$c]) {
+                                if($_POST[$a]==="x") {
+                                    $player_x_wins = true;
+                                } elseif ($_POST[$a] ==="o") {
+                                    $player_o_wins = true;
+                                }
+                            }
+                        }
                     } else {
                         $error=true;
                     }
