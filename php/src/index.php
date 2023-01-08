@@ -8,6 +8,10 @@
         <?php
 
         $error=false;
+        $player_x_wins=false;
+        $player_o_wins=false;
+        $input_count=0;
+
             // create 9 boxes for input fields (3x3) using for loop
             for($id=1; $id<=9; $id+=1) {
                 // insert break at 4 and 7 to make three rows
@@ -17,6 +21,8 @@
                 echo "<input name=$id type=text size=7>";
                 // determine when value has been submitted and is not empty
                 if(isset($_POST['submit']) && !empty($_POST[$id])) {
+                    // add 1 to input count each time a value is submitted. max input count is 9. 
+                    $input_count+=1;
                     // ensure value printed is only 'x' or 'o'
                     if(strtolower($_POST[$id]) === "x" | strtolower($_POST[$id]) === "o") {
                         echo "value=$_POST[$id]";
@@ -57,6 +63,9 @@
                 }
             }
         ?>
+        <br />
+        <br />
+        <button name="submit" type="submit">Complete Turn</button>
     </form>
 </body>
 
