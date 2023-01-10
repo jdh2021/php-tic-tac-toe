@@ -21,11 +21,13 @@
                 echo "<input name=$id type=text size=7";
                 // determine when value has been submitted and is not empty
                 if(isset($_POST['submit']) && !empty($_POST[$id])) {
+                    $input_character = strtolower($_POST[$id]);
+                    echo $input_character;
                     // ensure value printed is only 'x' or 'o'
-                    if((strtolower($_POST[$id]) === "x") | (strtolower($_POST[$id]) === "o")) {
+                    if($input_character === "x" | $input_character === "o") {
                         // add 1 to input count each time a value is submitted. max input count is 9. 
                         $input_count+=1;
-                        echo " value =".$_POST[$id]." readonly>";
+                        echo " value=".$input_character." readonly>";
                         // check for matches across rows at inputs 123, 456, 789
                         for($a=1, $b=2, $c=3; $a<=7, $b<=8, $c<=9; $a+=3, $b+=3, $c+=3) {
                             if(($_POST[$a]===$_POST[$b]) && ($_POST[$b]===$_POST[$c])) {
@@ -69,6 +71,18 @@
         <br />
         <button name="submit" type="submit">Complete Turn</button>
     </form>
+    <?php 
+        if ($player_x_wins) {
+            echo "Player x won!";
+        } elseif($player_o_wins) {
+            echo "Player o won!";
+        } elseif($input_count===9 && !$player_x_wins && !$player_o_wins ) {
+            echo "This game is a draw!";
+        } else {
+            echo "Enter 'x' or 'o' and then click 'Complete Turn'";
+        }
+    ?>
+
 </body>
 
 </html>
