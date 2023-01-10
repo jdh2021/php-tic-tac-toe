@@ -22,7 +22,6 @@
                 // determine when value has been submitted and is not empty
                 if(isset($_POST['submit']) && !empty($_POST[$id])) {
                     $input_character = strtolower($_POST[$id]);
-                    echo $input_character;
                     // ensure value printed is only 'x' or 'o'
                     if($input_character === "x" | $input_character === "o") {
                         // add 1 to input count each time a value is submitted. max input count is 9. 
@@ -49,7 +48,7 @@
                             }
                         }
                         // check for diagonal matches at 159, 357
-                        for($a=1, $b=5, $c=9; $a<=3, $b<=5, $c<=7; $a+=2, $b+=0, $c-=2) {
+                        for($a=1, $b=5, $c=9; $a<=3, $b<=5, $c>=7; $a+=2, $b+=0, $c-=2) {
                             if(($_POST[$a]===$_POST[$b]) && ($_POST[$b]===$_POST[$c])) {
                                 if($_POST[$a]==="x") {
                                     $player_x_wins = true;
@@ -59,6 +58,7 @@
                             }
                         }
                     } else {
+                        echo ">";
                         $error=true;
                     }
                 }
@@ -77,7 +77,9 @@
         } elseif($player_o_wins) {
             echo "Player o won!";
         } elseif($input_count===9 && !$player_x_wins && !$player_o_wins ) {
-            echo "This game is a draw!";
+            echo "It's a draw!";
+        } elseif($error) {
+            echo "Please only enter 'x' or 'o'!";
         } else {
             echo "Enter 'x' or 'o' and then click 'Complete Turn'";
         }
