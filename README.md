@@ -5,7 +5,6 @@ I built a Tic Tac Toe game using only PHP, HTML, and CSS. Each player enters eit
 ### Screenshot
 
 <div align="center">
-<link rel="stylsheet" href="php/>
  <img src="php/public/images/tic-tac-toe.png" width=400 />
 </div>
 
